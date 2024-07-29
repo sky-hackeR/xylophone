@@ -6,103 +6,47 @@ void main() => runApp(const XylophoneApp());
 class XylophoneApp extends StatelessWidget {
   const XylophoneApp({super.key});
 
+  void playSound(int soundNumber) {
+
+    final player = AudioPlayer();
+                  
+    player.play(AssetSource('note$soundNumber.wav'));
+
+  }
+
+  Expanded buildKey({required Color color, required int soundNumber}) {
+    return Expanded(
+      child: TextButton(
+        onPressed: (){
+          playSound(soundNumber);
+        }, 
+        style: TextButton.styleFrom(
+          backgroundColor: color, 
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ), 
+        ),
+        child: Container(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              TextButton(
-                onPressed: (){
-              
-                  final player = AudioPlayer();
-                  
-                  player.play(AssetSource('note7.wav'));
-                }, 
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.red, 
-                ),
-                child: const Text('7'),
-              ),
-
-              TextButton(
-                  onPressed: (){
-                
-                    final player = AudioPlayer();
-                    
-                    player.play(AssetSource('note6.wav'));
-                  }, 
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.purple, 
-                  ),
-                  child: const Text('6'),
-                ),
-
-                TextButton(
-                  onPressed: (){
-                
-                    final player = AudioPlayer();
-                    
-                    player.play(AssetSource('note5.wav'));
-                  }, 
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.orange, 
-                  ),
-                  child: const Text('5'),
-                ),
-
-                TextButton(
-                  onPressed: (){
-                
-                    final player = AudioPlayer();
-                    
-                    player.play(AssetSource('note4.wav'));
-                  }, 
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.teal, 
-                  ),
-                  child: const Text('4'),
-                ),
-
-                TextButton(
-                  onPressed: (){
-                
-                    final player = AudioPlayer();
-                    
-                    player.play(AssetSource('note3.wav'));
-                  }, 
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.green, 
-                  ),
-                  child: const Text('3'),
-                ),
-
-                TextButton(
-                  onPressed: (){
-                
-                    final player = AudioPlayer();
-                    
-                    player.play(AssetSource('note2.wav'));
-                  }, 
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.yellow, 
-                  ),
-                  child: const Text('2'),
-                ),
-
-                TextButton(
-                  onPressed: (){
-                
-                    final player = AudioPlayer();
-                    
-                    player.play(AssetSource('note1.wav'));
-                  }, 
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue, 
-                  ),
-                  child: const Text('1'),
-                ),
+              buildKey(color: Colors.purple, soundNumber: 1),
+              buildKey(color: Colors.pink, soundNumber:2),
+              buildKey(color: Colors.blue, soundNumber:3),
+              buildKey(color: Colors.orange, soundNumber:4),
+              buildKey(color: Colors.brown, soundNumber:5),
+              buildKey(color: Colors.yellow, soundNumber:6),
+              buildKey(color: Colors.red, soundNumber:7),
             ],
           ),
         ),
